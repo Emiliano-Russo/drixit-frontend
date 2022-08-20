@@ -1,27 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Spin } from "antd";
+import { User } from "../types/User.interface";
+import { config } from "../myconfig";
+import { useLocation } from "react-router-dom";
 
-interface User {
-  email: string;
-  password: string;
+interface LocationState {
+  jwt: string;
 }
 
-const url = "http://localhost:3010/api/v0/users/me";
-const token =
-  "?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3IiwiaWF0IjoxNjYxMDE1OTAyfQ.PpXjCThsEEVWj1hT5JHse_fhwa5F6FMa--iyxtokGtM";
-
 export function UserInfo() {
+  const location = useLocation();
+  const state = location.state as LocationState;
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const uri = url + token;
+    const uri = config.userInfoRoute + "?token=" + state.jwt;
 
     axios
       .get(uri)
       .then((val) => {
-        console.log("result: ", val);
         const email = val.data.email;
         const password = val.data.password;
         setUser({ email, password });

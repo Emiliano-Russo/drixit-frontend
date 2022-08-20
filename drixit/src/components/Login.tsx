@@ -2,6 +2,7 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { Button, Input, Spin } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const [email, setEmail] = useState<string>("");
@@ -10,6 +11,7 @@ export function Login() {
   const [touchedInput, setTouchedInput] = useState<boolean>(false);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [nextTouched, setNextTouched] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   function isEmailValid(email: string): boolean {
     return email.includes("@") && !email.includes(" ") && email.includes(".");
@@ -32,8 +34,9 @@ export function Login() {
         email: email,
         password: password,
       })
-      .then((data) => {
-        console.log("data", data);
+      .then((res) => {
+        console.log("data", res);
+        navigate("/user-info", { state: { jwt: res.data.jwt } });
       })
       .catch((err) => {
         console.log("error", err);
