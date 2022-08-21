@@ -32,9 +32,9 @@ export function UserInfo() {
     axios
       .get(uri)
       .then((val) => {
-        const email = val.data.email;
-        const password = val.data.password;
-        setUser({ email, password });
+        const user = val.data as User;
+        console.log("user: ", user);
+        setUser(user);
       })
       .catch((err) => {
         console.log("err", err);
@@ -51,8 +51,17 @@ export function UserInfo() {
       {loading ? (
         <Spin></Spin>
       ) : (
-        <div>
-          <h2>{user?.email}</h2> <h2>{user?.password}</h2>
+        <div
+          style={{
+            padding: "20px",
+            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+          }}
+        >
+          <h2>
+            {user?.name} {user?.lastName}
+          </h2>
+          <h2>{user?.dni}</h2>
+          <h2>{user?.email}</h2>
         </div>
       )}
     </div>
