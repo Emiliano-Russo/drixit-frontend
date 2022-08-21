@@ -33,7 +33,6 @@ export function UserInfo() {
       .get(uri)
       .then((val) => {
         const user = val.data as User;
-        console.log("user: ", user);
         setUser(user);
       })
       .catch((err) => {
@@ -47,7 +46,7 @@ export function UserInfo() {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>User Info</h1>
+      <h1>User Information</h1>
       {loading ? (
         <Spin></Spin>
       ) : (
@@ -55,13 +54,25 @@ export function UserInfo() {
           style={{
             padding: "20px",
             boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+            width: "max-content",
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
           }}
         >
           <h2>
+            <strong>Name: </strong>
             {user?.name} {user?.lastName}
           </h2>
-          <h2>{user?.dni}</h2>
-          <h2>{user?.email}</h2>
+          <h2>
+            <strong>DNI: </strong>
+            {user?.dni}
+          </h2>
+          <h2>
+            <strong>Email: </strong>
+            {user?.email}
+          </h2>
         </div>
       )}
     </div>
