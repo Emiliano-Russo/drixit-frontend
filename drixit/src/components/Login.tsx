@@ -14,10 +14,6 @@ export function Login() {
   const [nextTouched, setNextTouched] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  function error(err: string) {
-    message.error(err);
-  }
-
   function isEmailValid(email: string): boolean {
     return email.includes("@") && !email.includes(" ") && email.includes(".");
   }
@@ -44,7 +40,7 @@ export function Login() {
         navigate("/user-info", { state: { jwt: res.data.jwt } });
       })
       .catch((err) => {
-        error(err.response.data);
+        message.error(err.response.data);
       });
   }
 
