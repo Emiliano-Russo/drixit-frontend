@@ -3,7 +3,7 @@ import { Button, Input, message, Spin } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { config } from "../myconfig";
+import { config } from "../routes";
 
 export function Login() {
   const [email, setEmail] = useState<string>("");
@@ -84,14 +84,14 @@ export function Login() {
       ></Input>
       <br></br>
 
-      <Input
+      <Input.Password
         hidden={!nextTouched}
         placeholder="Password"
         style={{ marginTop: 10 }}
         onChange={(e) => {
           setPassword(e.target.value);
         }}
-      ></Input>
+      ></Input.Password>
 
       <Button
         hidden={!emailValid || nextTouched}

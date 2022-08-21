@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { message, Spin } from "antd";
 import { User } from "../types/User.interface";
-import { config } from "../myconfig";
+import { config } from "../routes";
 import { useLocation } from "react-router-dom";
 
 interface LocationState {
